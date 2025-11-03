@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>💬 LLM Chat (WebSocket)</title>
+  <title>Chat</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -47,17 +47,18 @@
   <button onclick="send()">Send</button>
 
   <script>
-    const ws = new WebSocket("ws://localhost:8000/ws");
+    // const ws = new WebSocket("ws://localhost:8000/ws");
+    const ws = new WebSocket("ws://192.168.219.44:8000/ws");
     const chat = document.getElementById("chat");
     let currentBotDiv = null;
 
-    ws.onopen = () => console.log("✅ Connected to backend");
+    ws.onopen = () => console.log("Connected to backend");
 
     ws.onmessage = (event) => {
       const data = event.data.trim();
 
       // 답변 끝났음을 알리는 메시지
-      if (data === "✅ [end of response]") {
+      if (data === "[end of response]") {
         currentBotDiv = null; // 다음 질문에 대비
         const endDiv = document.createElement("div");
         endDiv.className = "end";
@@ -67,10 +68,17 @@
         return;
       }
 
+
+
       // JSON 파싱
       try {
         const json = JSON.parse(data);
-        if (json.response) {
+
+        if (json.message && json.message.content) {
+          appendToBotMessage(json.message.content);
+        }
+
+        else if (json.response) {
           appendToBotMessage(json.response);
         }
       } catch {
@@ -78,7 +86,7 @@
       }
     };
 
-    ws.onclose = () => console.log("🔒 Disconnected from server");
+    ws.onclose = () => console.log("Disconnected from server");
 
     function send() {
       const msg = document.getElementById("input").value.trim();

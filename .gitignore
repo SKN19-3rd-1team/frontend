@@ -1,3 +1,4 @@
 .venv
 
+backend/main-test.py
 */__pycache__
