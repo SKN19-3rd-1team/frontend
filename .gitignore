@@ -1,4 +1,17 @@
 .venv
 
-backend/main-test.py
+backend/main-test1.py
 */__pycache__
+
+backend/main.py
+backend/main-legacy.py
+backend/prompts
+
+*.json
+*.pem
+
+games
+info
+
+frontend-legacy
+
