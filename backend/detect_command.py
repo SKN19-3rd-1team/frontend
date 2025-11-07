@@ -17,7 +17,7 @@ def detect_command(input: str):
         prompt = "유저는 정보를 읽고 있습니다. 혹시 도움이 더 필요한지 물어보세요. "
         fixed = " "
 
-    elif any (li in input for li in ["팝업", "스토어", "코카콜라", "가는 길"]):
+    elif any (li in input for li in ["팝업", "스토어", "코카콜라", "가는 길", "성수", "콜라보"]):
         tool = "nothing_related"
         prompt = "지금 내가 코카콜라 팝업스토어나 코카콜라 게임 관련된 얘기를 하고 있나 파악하고 대답해. "
         fixed = "생각 중...."

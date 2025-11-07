@@ -48,6 +48,7 @@ async def websocket_endpoint(websocket: WebSocket):
                     html_content = await read_html_file("../games/tower.html")
 
                 if html_content:
+                    await asyncio.sleep(3.0)
                     await websocket.send_json({
                         "type": "html",
                         "html": html_content
@@ -65,7 +66,7 @@ async def websocket_endpoint(websocket: WebSocket):
                 if not chat_history or chat_history[0].get("role") != "system":
                     chat_history.insert(0, {
                         "role": "system", 
-                        "content": "넌 코카콜라 이벤트 도우미야. 손님이 많아서 불필요한 문장을 빼서 말해야 돼. 특히 [성수동, 코카콜라, 팝업스토어, 연락처, 게임]관련 질문이 아니면 더욱 짧게 대답만 해."
+                        "content": "넌 코카콜라 이벤트 도우미야. 손님이 많아서 불필요한 문장을 빼서 말해야 돼. 다만, [성수동, 코카콜라, 팝업스토어, 연락처, 게임]관련된 내용에는 성심성의껏 대답만 해."
                     })
 
 
@@ -85,7 +86,7 @@ async def websocket_endpoint(websocket: WebSocket):
                                 "content": w  # 단어 하나만 전송
                             }
                         })
-                        await asyncio.sleep(0.2)
+                        await asyncio.sleep(0.1)
 
 
                 
