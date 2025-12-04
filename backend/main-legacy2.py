@@ -1,3 +1,5 @@
+# fastCHAT 
+
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 import asyncio
 import httpx
@@ -69,14 +71,11 @@ async def websocket_endpoint(websocket: WebSocket):
                         "content": "넌 코카콜라 이벤트 도우미야. 손님이 많아서 불필요한 문장을 빼서 말해야 돼. 다만, [성수동, 코카콜라, 팝업스토어, 연락처, 게임]관련된 내용에는 성심성의껏 대답만 해."
                     })
 
-
                 async with client.stream(
                     "POST",
                     "http://localhost:11434/api/chat",
                     json={"model": "EEVE-Korean-10.8B", "messages": chat_history, "stream": True},
-                ) as response:
-                    
-                    
+                ) as response: 
                     
                     
                     for w in mcp_fixed_comment:
@@ -139,6 +138,6 @@ if __name__ == "__main__":
         "main-legacy2:app",
         host="0.0.0.0",
         port=8000,
-        # ssl_keyfile="key.pem",
-        # ssl_certfile="cert.pem"
+        ssl_keyfile="key.pem",
+        ssl_certfile="cert.pem"
     )

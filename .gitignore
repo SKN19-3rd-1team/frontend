@@ -6,12 +6,14 @@ backend/main-test1.py
 backend/main.py
 backend/main-legacy.py
 backend/prompts
+backend/keys
 
-*.json
-*.pem
-
-games
-info
-
+frontend/.next
+frontend/node_modules
 frontend-legacy
 
+*.pem
+
+data
+games
+info
