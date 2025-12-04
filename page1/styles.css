@@ -1,179 +1,327 @@
-:root {
-    /* Colors */
-    --color-bg: #FFF9F5;
-    --color-primary: #43334C;
-    --color-white: #FFFFFF;
-
-    /* Fonts */
-    --font-inter: 'Inter', sans-serif;
-    --font-roboto: 'Roboto', sans-serif;
-    --font-inria: 'Inria Serif', serif;
-}
-
-* {
-    box-sizing: border-box;
+/* 전체 배경 */
+body, html {
     margin: 0;
     padding: 0;
+    width: 100%;
+    height: 100%;
+    background: #FFF9F5;
+    font-family: 'Inter', sans-serif;
 }
 
-body {
-    background-color: var(--color-bg);
-    font-family: var(--font-roboto);
-    width: 1920px;
-    /* Fixed width as per design, or max-width */
-    margin: 0 auto;
-    overflow-x: hidden;
+.page-wrapper {
+    width: 100%;
+    height: 100%;
+    min-height: 1080px;
+    position: relative;
 }
 
-/* Header */
-header {
-    position: absolute;
-    top: 50px;
-    left: 50px;
+/* ----------------------
+    상단 네비바
+---------------------- */
+.top-nav {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-top: 50px;
+}
+
+.nav-inner {
     width: 1820px;
     height: 100px;
-    background-color: var(--color-primary);
+    background: #43334C;
     border-radius: 30px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 0 110px;
-    /* Adjust padding to match text positions */
+    justify-content: space-between;
+    padding: 0 50px;
 }
 
-.brand {
-    font-family: var(--font-inter);
+.nav-brand {
     font-size: 36px;
-    color: var(--color-white);
-    text-decoration: none;
+    color: white;
+    font-family: 'Inter', sans-serif;
 }
 
 .nav-menu {
-    list-style: none;
     display: flex;
+    gap: 50px;
 }
 
 .nav-link {
-    font-family: var(--font-inter);
+    color: white;
     font-size: 36px;
-    color: var(--color-white);
     text-decoration: none;
 }
 
-/* Main Content */
-main {
-    padding-top: 200px;
-    /* Space for header */
+/* ----------------------
+    메인 영역
+---------------------- */
+.main-area {
     display: flex;
     justify-content: center;
+    margin-top: 60px;
 }
 
-.hero-section {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    /* Or fit content */
-    display: flex;
-    justify-content: center;
-}
-
-/* Frame 47684 Container */
-.content-container {
-    position: relative;
-    width: 1300px;
-    /* Approximate width based on children */
-    height: 800px;
-}
-
-/* The main card background */
-.card-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #F2F2F2;
-    /* Placeholder color if not specified, using light gray */
-    border: 1px solid #000;
-    /* Placeholder */
+.card-container {
+    width: 1820px;
+    height: 820px;
+    background: #F8F4EC;
     border-radius: 30px;
-    z-index: -1;
-    /* Actual styles from Rectangle 13 (513:1688) */
-    background-color: #FFFFFF;
-    /* Assuming white based on typical card */
-    border: 1px solid #D9D9D9;
-}
-
-/* Frame 47699 Content */
-.hero-content {
+    border: 1px solid #FFF7F3;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    padding-top: 100px;
 }
 
-.hero-title {
-    font-family: var(--font-inria);
-    /* From Style TF0FSD/NHPB1A? No, wait. */
-    /* "Hello And Welcome" 513:1690 uses style_TF0FSD which is Inria Serif 24px? 
-     Wait, let's check the data again.
-     513:1690 "Hello And Welcome" -> style_TF0FSD
-     style_TF0FSD -> Inria Serif, 700, 24px.
-     Wait, in the first fetch it was Inria Serif 24px.
-     In the second fetch (Frame 47684), "Hello And Welcome" text style is style_TF0FSD.
-     Let's verify the font size.
-  */
+/* 카드 내부 */
+.card {
+    width: 880px;
+    text-align: center;
+    position: relative;
+}
+
+.title {
+    font-size: 48px;
+    color: #583A36;
     font-family: 'Inria Serif', serif;
     font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.subtitle {
     font-size: 24px;
-    color: var(--color-primary);
-    /* fill_P7UK3H */
-    margin-bottom: 20px;
-    /* Stroke? stroke_0TZG7S */
-}
-
-.hero-image {
-    width: 400px;
-    /* Placeholder dimensions */
-    height: 300px;
-    background-color: #ccc;
-    /* Placeholder */
+    color: #583A36;
+    font-family: 'Inria Serif', serif;
     margin-bottom: 40px;
-    object-fit: cover;
 }
 
-.button-group {
-    display: flex;
-    gap: 20px;
+/* 이미지 */
+.hero-img {
+    width: 300px;
+    height: 300px;
+    object-fit: contain;
+    margin-bottom: 50px;
 }
 
-.btn {
-    width: 250px;
-    height: 80px;
-    border-radius: 20px;
+/* ----------------------
+    버튼 영역
+---------------------- */
+.button-row {
     display: flex;
     justify-content: center;
-    align-items: center;
-    font-family: var(--font-roboto);
-    font-size: 32px;
-    cursor: pointer;
-    text-decoration: none;
-    transition: opacity 0.2s;
-}
-
-.btn:hover {
-    opacity: 0.9;
+    gap: 30px;
 }
 
 .btn-primary {
-    background-color: var(--color-primary);
-    color: var(--color-white);
+    width: 250px;
+    height: 80px;
+    background: #43334C;
+    border-radius: 20px;
     border: none;
+    color: white;
+    font-size: 32px;
+    font-family: 'Roboto', sans-serif;
+    cursor: pointer;
 }
 
 .btn-outline {
-    background-color: transparent;
-    color: var(--color-primary);
-    border: 2px solid var(--color-primary);
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    width: 250px;
+    height: 80px;
+    background: transparent;
+    border-radius: 20px;
+    color: #43334C;
+    border: 2px solid #43334C;
+    font-size: 32px;
+    font-family: 'Roboto', sans-serif;
+    box-shadow: 0 4px 4px rgba(0,0,0,0.25);
+    cursor: pointer;
+}
+
+/* ------------------------
+    로그인/회원가입 팝업 렌더링
+------------------------ */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-content {
+    background: white;
+    padding: 24px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 360px;
+}
+
+/* ----------------------
+    로그인/회원가입 팝업 영역
+---------------------- */
+/* 기본 레이아웃 초기화 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+/* 모달 배경 */
+.popup-modal {
+    position: fixed;
+    inset: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.popup-modal.show {
+    display: flex;
+}
+
+.popup-modal-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+/* 모달 컨테이너 */
+.popup-modal-content {
+    position: relative;
+    width: 90%;
+    height: 90%;
+    max-width: 500px;
+    max-height: 600px;
+    background: #fff;
+    border-radius: 14px;
+    padding: 30px;
+    z-index: 10;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* 닫기 버튼 */
+.popup-modal-close {
+    position: absolute;
+    right: 16px;
+    top: 14px;
+    border: none;
+    background: none;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+/* 제목 */
+.popup-modal-title {
+    text-align: center;
+    font-size: 26px;
+    font-weight: 700;
+    margin-top: 24px;
+    margin-bottom: 24px;
+}
+
+/* 폼 */
+.popup-modal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.popup-field {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.popup-label {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.popup-input {
+    height: 42px;
+    padding: 10px 14px;
+    border: 1.4px solid #ddd;
+    border-radius: 10px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+/* 이메일 텍스트필드 & 버튼 가로 배치 */
+.popup-email-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+}
+
+/* 버튼 */
+.popup-btn-primary {
+    margin-top: 10px;
+    width: 100%;
+    padding: 12px 14px;
+    background: #43334C;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 18px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+/* 버튼2 */
+.popup-btn-primary2 {
+    width: 100%;
+    padding: 12px 14px;
+    background: #999999;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 18px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+/* 인증 버튼 */
+.popup-auth-btn-primary {
+    height: 42px; 
+    width: 20%;
+    padding: 0px 14px;
+    background: #43334C;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    font-weight: 600;
+    margin-top: 0; 
+}
+
+/* 하단 */
+.login-modal-footer {
+    margin-top: 18px;
+    text-align: center;
+}
+
+.login-forgot-link {
+    font-size: 16px;
+    color: #FF0A0A;
+    text-decoration: none;
+}
+
+.login-signup-row {
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+.login-signup-row a {
+    color: #FF0A0A;
+    text-decoration: none;
 }
