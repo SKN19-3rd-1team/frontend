@@ -1,3 +1,13 @@
+// 채팅/설정 버튼
+const settingBtn = document.getElementById("btn-setting"); 
+const settingPage = fetch("./../page2/index.html");
+
+if (settingBtn) {
+    settingBtn.addEventListener("click", () => {
+        settingPage.classList.add("show");
+    });
+}
+
 // 메인 콘텐츠 로그인/회원가입 버튼
 const signInBtn = document.getElementById("btn-signin");
 const signUpBtn = document.getElementById("btn-signup");
