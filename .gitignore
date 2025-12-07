@@ -6,3 +6,17 @@ node_modules
 
 #.vscode
 .vscode
+.claude
+
+
+# pycache
+__pycache__
+
+# data
+backend/data/vector_db
+
+# backend/data/
+
+# AGENTS
+AGENTS.md
+CLAUDE.md
