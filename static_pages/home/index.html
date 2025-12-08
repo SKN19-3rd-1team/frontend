@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unigo</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- ?�트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inria+Serif:wght@700&family=Inter:wght@400&family=Roboto:wght@400&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="page-wrapper">
+        <!-- ?�단 ?�비�?-->
+        <header class="top-nav">
+            <div class="nav-inner">
+                <div class="nav-brand">Unigo</div>
+                <div class="nav-menu">
+                    <a href="../chat/index.html" class="nav-link" id="btn-chat">Chat</a>
+                    <a href="../setting/index.html" class="nav-link" id="btn-setting">Setting</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- 메인 콘텐�?-->
+        <main class="main-area" id="main-area">
+            <div class="card-container">
+
+                <div class="card">
+
+                    <h1 class="title">Hello And Welcome</h1>
+                    <p class="subtitle">A chatbot that helps you discover the right major and university for you</p>
+
+                    <img src="./../assets/rabbit.png" alt="Hero Image" class="hero-img"
+                        onerror="this.style.backgroundColor='#ccc'">
+
+                    <div class="button-row">
+                        <button class="btn-primary" id="btn-signin">Sign In</button>
+                        <button class="btn-outline" id="btn-signup">Sign Up</button>
+                    </div>
+
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- 로그??모달 -->
+    <div class="popup-modal" id="login-modal" aria-hidden="true">
+        <div class="popup-modal-overlay" id="login-overlay"></div>
+
+        <div class="popup-modal-content" role="dialog" aria-modal="true">
+            <button class="popup-modal-close" id="btn-login-close">×</button>
+
+            <h2 class="popup-modal-title">Login</h2>
+
+            <form class="popup-modal-form" onsubmit="return false;">
+
+                <label class="popup-field">
+                    <span class="popup-label">* ?�메??/span>
+                    <input type="email" class="popup-input" placeholder="example@you.com" required />
+                </label>
+
+                <label class="popup-field">
+                    <span class="popup-label">* 비�?번호</span>
+                    <input type="password" class="popup-input" placeholder="Password" required />
+                </label>
+
+                <button class="popup-btn-primary" id="btn-login-confirm">로그??/button>
+            </form>
+
+            <div class="login-modal-footer">
+                <a href="#" class="login-forgot-link" id="link-forgot-password">Forgot password</a>
+
+                <div class="login-signup-row" id="link-signup">
+                    <span>Don?�t have an account?</span>
+                    <a href="#" class="signup-link">Sign up</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ?�원가??모달 -->
+    <div class="popup-modal" id="signup-modal" aria-hidden="true">
+        <div class="popup-modal-overlay" id="signup-overlay"></div>
+
+        <div class="popup-modal-content" role="dialog" aria-modal="true">
+            <button class="popup-modal-close" id="btn-signup-close">×</button>
+
+            <h2 class="popup-modal-title">Sign up</h2>
+
+            <form class="popup-modal-form" onsubmit="return false;">
+                <div class="popup-email-row">
+                    <label class="popup-field">
+                        <span class="popup-label">* ?�메??/span>
+                        <input type="email" class="popup-input" placeholder="example@you.com" required />
+                    </label>
+                    <button class="popup-auth-btn-primary" id="btn-email-confirm">?�증</button>
+                </div>
+
+                <label class="popup-field">
+                    <span class="popup-label">* ?�네??/span>
+                    <input type="nickname" class="popup-input" placeholder="Hong Gildong" required />
+                </label>
+
+                <label class="popup-field">
+                    <span class="popup-label">* 비�?번호</span>
+                    <input type="password" class="popup-input" id="signup-password" placeholder="Password" required />
+                </label>
+
+                <label class="popup-field">
+                    <span class="popup-label">* 비�?번호 ?�인</span>
+                    <input type="password-check" class="popup-input" id="signup-password-check"
+                        placeholder="Password Check" required />
+                </label>
+
+                <button class="popup-btn-primary" id="btn-signup-confirm">?�원가???�료</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ?�원가???�료 모달 -->
+    <div class="popup-modal" id="signup-complete-modal" aria-hidden="true">
+        <div class="popup-modal-overlay" id="signup-complete-overlay"></div>
+
+        <div class="popup-modal-content" role="dialog" aria-modal="true">
+            <button class="popup-modal-close" id="btn-signup-complete-close">×</button>
+
+            <h2 class="popup-modal-title">?�원가?�이 ?�료?�었?�니??</h2>
+        </div>
+    </div>
+
+    <!-- 비�?번호 찾기 모달 -->
+    <div class="popup-modal" id="find-password-modal" aria-hidden="true">
+        <div class="popup-modal-overlay" id="find-password-overlay"></div>
+
+        <div class="popup-modal-content" role="dialog" aria-modal="true">
+            <button class="popup-modal-close" id="btn-find-password-close">×</button>
+
+            <h2 class="popup-modal-title">비�?번호 찾기</h2>
+
+            <form class="popup-modal-form" onsubmit="return false;">
+
+                <label class="popup-field">
+                    <span class="popup-label">* ?�메??/span>
+                    <input type="email" class="popup-input" placeholder="example@you.com" required />
+                </label>
+
+                <div class="login-modal-footer">
+                    가?�하???�메??주소�??�시 비�?번호�??�송?�니??<br>
+                    로그???? ?�로??비�?번호�??�데?�트?�세??
+                </div>
+
+                <button class="popup-btn-primary" id="btn-temp-password">?�시 비�?번호 받기</button>
+                <button class="popup-btn-primary2" id="btn-return-login">로그???�면?�로 ?�아가�?/button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

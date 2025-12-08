@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unigo</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- ?∞Ìä∏ -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inria+Serif:wght@700&family=Inter:wght@400&family=Roboto:wght@400&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="page-wrapper">
+        <!-- ?ÅÎã® ?§ÎπÑÎ∞?-->
+        <header class="top-nav">
+            <div class="nav-inner">
+                <div class="nav-brand">Unigo</div>
+                <div class="nav-menu">
+                    <a href="../chat/index.html" class="nav-link" id="btn-chat">Chat</a>
+                    <a href="../setting/index.html" class="nav-link" id="btn-setting">Setting</a>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-area" id="main-setting-area">
+            <!-- ?ºÏ™Ω ?¨Ïù¥?úÎ∞î -->
+            <aside class="sidebar">
+                <div class="sidebar-user-box">
+                    <div class="sidebar-avatar"></div>
+                    <div class="sidebar-username">username</div>
+                    <div class="sidebar-email">skn99-3rd-1team@sk.com</div>
+                </div>
+                <div class="sidebar-menu-box">
+                    <div class="sidebar-btn active">Í≥ÑÏ†ï</div>
+                    <div class="sidebar-btn inactive">?ÑÎ°ú??/div>
+                </div>
+            </aside>
+
+            <!-- ?§Î•∏Ï™??§Ï†ï ?®ÎÑê -->
+            <div class="setting-panel">
+                <div class="setting-inner">
+
+                    <div class="setting-title">Í≥ÑÏ†ï ?§Ï†ï</div>
+                    <div class="setting-desc">Í≥ÑÏ†ï ?ïÎ≥¥Î•?Í¥ÄÎ¶¨Ìï©?àÎã§.</div>
+
+                    <form onsubmit="return false;">
+
+                        <!-- ?âÎÑ§??Î≥ÄÍ≤?-->
+                        <div class="setting-section-title">?âÎÑ§??Î≥ÄÍ≤?/div>
+
+                        <div class="setting-input-wrapper">
+                            <input type="text" class="setting-input" placeholder="*?¨Ïö© Ï§ëÏù∏ ?âÎÑ§?? />
+                            <button class="setting-btn">Ï§ëÎ≥µ ?ïÏù∏</button>
+                        </div>
+
+                        <!-- ÎπÑÎ?Î≤àÌò∏ Î≥ÄÍ≤?-->
+                        <div class="setting-section-title">ÎπÑÎ?Î≤àÌò∏ Î≥ÄÍ≤?/div>
+
+                        <div class="setting-input-wrapper">
+                            <input type="email" class="setting-input" placeholder="* ?¥Î©î?? />
+                            <button class="setting-btn">?∏Ï¶ù</button>
+                        </div>
+
+                        <div style="margin-top:20px;">
+                            <input type="password" class="setting-input" style="width:850px" placeholder="* ÎπÑÎ?Î≤àÌò∏" />
+                        </div>
+                        <div>
+                            <input type="password" class="setting-input" style="width:850px; margin-top:10px;" placeholder="* ÎπÑÎ?Î≤àÌò∏ ?ïÏù∏" />
+                        </div>
+
+                        <!-- ÎπÑÎ?Î≤àÌò∏ Ï∞æÍ∏∞ -->
+                        <div class="setting-section-title">ÎπÑÎ?Î≤àÌò∏ Ï∞æÍ∏∞</div>
+                        <div class="setting-desc" style="margin-top:-25px;">?ÑÏãú ÎπÑÎ?Î≤àÌò∏Î•??ÑÏÜ°?©Îãà??</div>
+
+                        <div class="setting-input-wrapper">
+                            <input type="email" class="setting-input" placeholder="* ?¥Î©î?? />
+                            <button class="setting-btn">?ÑÏÜ°</button>
+                        </div>
+
+                        <!-- ?úÏ∂ú -->
+                        <button class="setting-submit">?åÏõêÍ∞Ä???ÑÎ£å</button>
+
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+<script src="script.js"></script>
+</body>
+</html>
