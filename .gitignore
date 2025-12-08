@@ -1,5 +1,6 @@
-# env
+# Environment variables (contains sensitive API keys)
 .env
+# Keep .env.example for reference (not ignored)
 
 # node
 node_modules

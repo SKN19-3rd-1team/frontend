@@ -18,10 +18,30 @@ if frontend_dir not in sys.path:
 
 try:
     from backend.main import run_mentor, run_major_recommendation
-except ImportError:
-    print("Backend module not found via standard import. Checking path...")
-    # Fallback or error handling
-    pass
+except ImportError as e:
+    error_msg = f"""
+    ❌ Backend 모듈을 찾을 수 없습니다!
+    
+    현재 Python 경로: {sys.path}
+    Frontend 디렉토리: {frontend_dir}
+    
+    해결 방법:
+    1. .env 파일에서 PROJECT_ROOT 설정 (권장):
+       - 파일 위치: {os.path.join(frontend_dir, '.env')}
+       - 설정 예시: PROJECT_ROOT=C:\\Users\\user\\github\\frontend
+       - .env.example 파일을 참고하세요
+    
+    2. 또는 python-dotenv 설치:
+       pip install python-dotenv
+    
+    3. 또는 PYTHONPATH 환경 변수 설정:
+       Windows: set PYTHONPATH=%PYTHONPATH%;{frontend_dir}
+       Linux/Mac: export PYTHONPATH=$PYTHONPATH:{frontend_dir}
+    
+    원본 에러: {e}
+    """
+    print(error_msg)
+    raise ImportError(error_msg) from e
 
 # Create your views here.
 

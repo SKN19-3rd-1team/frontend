@@ -59,26 +59,59 @@ pip install django
 
 ### 4. 환경 변수 설정
 
-프로젝트 루트에 `.env` 파일을 생성하고 다음 내용을 추가하세요:
+#### 4.1 .env 파일 생성
 
-```env
-# OpenAI 설정
-OPENAI_API_KEY=your_openai_api_key_here
+프로젝트 루트에 `.env.example` 파일을 `.env`로 복사하고 실제 값을 입력하세요:
 
-# LLM 설정
-LLM_PROVIDER=openai
-MODEL_NAME=gpt-4o-mini
+```bash
+# Windows (PowerShell)
+Copy-Item .env.example .env
 
-# Pinecone 설정 (선택사항)
-PINECONE_API_KEY=your_pinecone_key_here
-PINECONE_INDEX_NAME=major-index
-PINECONE_ENVIRONMENT=us-east-1
-
-# 데이터 경로 (기본값 사용 가능)
-MAJOR_DETAIL_PATH=backend/data/major_detail.json
+# Linux/Mac
+cp .env.example .env
 ```
 
-**중요**: `.env` 파일은 `.gitignore`에 포함되어 있어 Git에 커밋되지 않습니다.
+#### 4.2 필수 설정 입력
+
+`.env` 파일을 열어 다음 항목을 설정하세요:
+
+```env
+# ============================================
+# Project Configuration
+# ============================================
+# 프로젝트 루트 경로 (backend 모듈 import를 위해 필요)
+# ⚠️ 반드시 본인의 실제 경로로 변경하세요!
+PROJECT_ROOT=C:\Users\user\github\frontend  # Windows
+# PROJECT_ROOT=/home/user/github/frontend  # Linux/Mac
+
+# ============================================
+# API Keys
+# ============================================
+# OpenAI
+OPENAI_API_KEY=your_openai_api_key_here
+
+# Langchain & LangSmith (선택사항)
+LANGCHAIN_API_KEY=your_langchain_api_key_here
+LANGSMITH_API_KEY=your_langsmith_api_key_here
+
+# Pinecone (선택사항)
+PINECONE_API_KEY=your_pinecone_api_key_here
+```
+
+**중요**: 
+- `PROJECT_ROOT`는 **반드시 본인의 실제 프로젝트 경로**로 변경하세요
+- Windows에서는 백슬래시(`\`)를 사용합니다
+- `.env` 파일은 `.gitignore`에 포함되어 Git에 커밋되지 않습니다
+
+#### 4.3 python-dotenv 설치
+
+`.env` 파일을 자동으로 로드하기 위해 `python-dotenv`를 설치하세요:
+
+```bash
+pip install python-dotenv
+```
+
+**참고**: `requirements.txt`에 이미 포함되어 있으므로, `pip install -r requirements.txt`를 실행했다면 별도 설치가 필요 없습니다.
 
 ### 5. Django 데이터베이스 마이그레이션
 
@@ -263,6 +296,70 @@ python manage.py migrate
 - 정상적인 현상입니다 (보통 3-10초)
 - 더 빠른 모델 사용 (`gpt-3.5-turbo`)
 - 네트워크 연결 확인
+
+### 7. ImportError: name 'run_major_recommendation' is not defined
+
+**원인**: Python이 `backend` 모듈을 찾지 못해 import 실패
+
+**증상**:
+```
+Error in onboarding_api: name 'run_major_recommendation' is not defined
+Internal Server Error: /api/onboarding
+```
+
+**해결 방법**:
+
+**방법 1 - .env 파일에서 PROJECT_ROOT 설정 (가장 권장)**:
+
+1. `.env` 파일을 열어 `PROJECT_ROOT` 설정:
+```env
+# Windows
+PROJECT_ROOT=C:\Users\user\github\frontend
+
+# Linux/Mac
+PROJECT_ROOT=/home/user/github/frontend
+```
+
+2. `python-dotenv` 설치 확인:
+```bash
+pip install python-dotenv
+```
+
+3. 서버 실행:
+```bash
+cd unigo
+python manage.py runserver
+```
+
+서버 시작 시 다음 메시지가 표시되면 성공:
+```
+✅ Loaded environment variables from: C:\Users\user\github\frontend\.env
+✅ Added to PYTHONPATH: C:\Users\user\github\frontend
+```
+
+**방법 2 - PYTHONPATH 환경 변수 임시 설정**:
+```bash
+# Windows (PowerShell)
+$env:PYTHONPATH = "$env:PYTHONPATH;C:\Users\user\github\frontend"
+python manage.py runserver
+
+# Windows (CMD)
+set PYTHONPATH=%PYTHONPATH%;C:\Users\user\github\frontend
+python manage.py runserver
+
+# Linux/Mac
+export PYTHONPATH=$PYTHONPATH:/path/to/frontend
+python manage.py runserver
+```
+
+**방법 3 - 환경 변수 영구 설정 (Windows)**:
+1. "시스템 환경 변수 편집" 검색
+2. "환경 변수" 클릭
+3. 사용자 변수에서 "새로 만들기"
+4. 변수 이름: `PYTHONPATH`
+5. 변수 값: `C:\Users\user\github\frontend`
+6. 터미널 재시작 후 서버 실행
+
 
 ## 📊 로그 확인
 

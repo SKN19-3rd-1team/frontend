@@ -83,13 +83,36 @@ pip install django
 
 ### 2. 환경 변수 설정
 
-`.env` 파일 생성 및 API 키 설정:
+`.env.example` 파일을 `.env`로 복사하고 실제 값을 입력하세요:
+
+```bash
+# Windows (PowerShell)
+Copy-Item .env.example .env
+
+# Linux/Mac
+cp .env.example .env
+```
+
+`.env` 파일을 열어 다음 항목을 설정:
 
 ```env
+# ============================================
+# Project Configuration
+# ============================================
+# 프로젝트 루트 경로 (backend 모듈 import를 위해 필요)
+# ⚠️ 반드시 본인의 실제 경로로 변경하세요!
+PROJECT_ROOT=C:\Users\user\github\frontend  # Windows
+# PROJECT_ROOT=/home/user/github/frontend  # Linux/Mac
+
+# ============================================
+# API Keys
+# ============================================
 OPENAI_API_KEY=your_openai_api_key_here
 LLM_PROVIDER=openai
 MODEL_NAME=gpt-4o-mini
 ```
+
+**중요**: `PROJECT_ROOT`는 반드시 본인의 실제 프로젝트 경로로 변경하세요!
 
 ### 3. Django 서버 실행
 
@@ -277,6 +300,18 @@ python manage.py runserver 8001
 
 ### Backend 모듈을 찾을 수 없는 경우
 
+**방법 1 - .env 파일에서 PROJECT_ROOT 설정 (권장)**:
+
+`.env` 파일을 열어 `PROJECT_ROOT` 설정:
+```env
+# Windows
+PROJECT_ROOT=C:\Users\user\github\frontend
+
+# Linux/Mac
+PROJECT_ROOT=/home/user/github/frontend
+```
+
+**방법 2 - PYTHONPATH 환경 변수 설정**:
 ```bash
 # PYTHONPATH 설정 (Windows)
 set PYTHONPATH=%PYTHONPATH%;C:\path\to\frontend
@@ -284,6 +319,8 @@ set PYTHONPATH=%PYTHONPATH%;C:\path\to\frontend
 # PYTHONPATH 설정 (Linux/Mac)
 export PYTHONPATH=$PYTHONPATH:/path/to/frontend
 ```
+
+자세한 내용은 [실행 가이드](docs/guide.md)의 "문제 해결" 섹션을 참고하세요.
 
 ### OpenAI API 오류
 
