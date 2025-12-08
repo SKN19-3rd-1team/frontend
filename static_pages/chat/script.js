@@ -25,7 +25,7 @@ const saveHistory = () => {
 const createBubble = (text, type) => {
     const bubble = document.createElement('div');
     bubble.classList.add('bubble', type);
-    // 텍스트 내의 줄바꿈 처리
+    // ?띿뒪???댁쓽 以꾨컮轅?泥섎━
     bubble.innerHTML = text.replace(/\n/g, '<br>');
     return bubble;
 };
@@ -83,18 +83,18 @@ const handleSend = async () => {
     const text = chatInput.value.trim();
     if (!text) return;
 
-    // 1. 사용자 메시지 표시
+    // 1. ?ъ슜??硫붿떆吏 ?쒖떆
     appendBubble(text, 'user');
     chatInput.value = '';
 
-    // 2. 로딩 표시
+    // 2. 濡쒕뵫 ?쒖떆
     const loadingBubble = showLoadingDetails();
 
     try {
-        // 3. API 호출
+        // 3. API ?몄텧
         const payload = {
             message: text,
-            history: chatHistory.slice(0, -1) // 현재 메시지는 이미 추가했으므로 제외하거나 포함 정책 결정. 
+            history: chatHistory.slice(0, -1) // ?꾩옱 硫붿떆吏???대? 異붽??덉쑝誘濡??쒖쇅?섍굅???ы븿 ?뺤콉 寃곗젙. 
             // backend logic: run_mentor takes history + current question. 
             // Our chatHistory already includes the current 'user' message we just pushed?
             // Wait, appendBubble pushes to chatHistory. 
@@ -123,14 +123,14 @@ const handleSend = async () => {
 
         const data = await response.json();
 
-        // 4. 로딩 제거 및 응답 표시
+        // 4. 濡쒕뵫 ?쒓굅 諛??묐떟 ?쒖떆
         if (loadingBubble) loadingBubble.remove();
         appendBubble(data.response, 'ai');
 
     } catch (error) {
         console.error('Error:', error);
         if (loadingBubble) loadingBubble.remove();
-        appendBubble('오류가 발생했습니다. 잠시 후 다시 시도해주세요.', 'ai', false);
+        appendBubble('?ㅻ쪟媛 諛쒖깮?덉뒿?덈떎. ?좎떆 ???ㅼ떆 ?쒕룄?댁＜?몄슂.', 'ai', false);
     }
 
     chatInput.focus();
@@ -142,7 +142,7 @@ if (sendBtn) {
 
 if (chatInput) {
     chatInput.addEventListener('keydown', (event) => {
-        // 한글 입력 중 엔터 키 중복 처리 방지 (isComposing)
+        // ?쒓? ?낅젰 以??뷀꽣 ??以묐났 泥섎━ 諛⑹? (isComposing)
         if (event.key === 'Enter' && !event.isComposing) {
             event.preventDefault();
             handleSend();

@@ -1,4 +1,4 @@
-/* 전체 배경 */
+/* ?꾩껜 諛곌꼍 */
 body, html {
     margin: 0;
     padding: 0;
@@ -16,7 +16,7 @@ body, html {
 }
 
 /* ----------------------
-    상단 네비바
+    ?곷떒 ?ㅻ퉬諛?
 ---------------------- */
 .top-nav {
     width: 100%;
@@ -54,7 +54,7 @@ body, html {
 }
 
 /* ----------------------
-    메인 영역
+    硫붿씤 ?곸뿭
 ---------------------- */
 .main-area {
     display: flex;
@@ -73,7 +73,7 @@ body, html {
     align-items: center;
 }
 
-/* 카드 내부 */
+/* 移대뱶 ?대? */
 .card {
     width: 880px;
     text-align: center;
@@ -95,7 +95,7 @@ body, html {
     margin-bottom: 40px;
 }
 
-/* 이미지 */
+/* ?대?吏 */
 .hero-img {
     width: 300px;
     height: 300px;
@@ -104,7 +104,7 @@ body, html {
 }
 
 /* ----------------------
-    버튼 영역
+    踰꾪듉 ?곸뿭
 ---------------------- */
 .button-row {
     display: flex;
@@ -138,7 +138,7 @@ body, html {
 }
 
 /* ------------------------
-    로그인/회원가입 팝업 렌더링
+    濡쒓렇???뚯썝媛???앹뾽 ?뚮뜑留?
 ------------------------ */
 .modal {
     display: none;
@@ -163,9 +163,9 @@ body, html {
 }
 
 /* ----------------------
-    로그인/회원가입 팝업 영역
+    濡쒓렇???뚯썝媛???앹뾽 ?곸뿭
 ---------------------- */
-/* 기본 레이아웃 초기화 */
+/* 湲곕낯 ?덉씠?꾩썐 珥덇린??*/
 * {
     margin: 0;
     padding: 0;
@@ -173,7 +173,7 @@ body, html {
     font-family: 'Inter', sans-serif;
 }
 
-/* 모달 배경 */
+/* 紐⑤떖 諛곌꼍 */
 .popup-modal {
     position: fixed;
     inset: 0;
@@ -193,7 +193,7 @@ body, html {
     background: rgba(0, 0, 0, 0.4);
 }
 
-/* 모달 컨테이너 */
+/* 紐⑤떖 而⑦뀒?대꼫 */
 .popup-modal-content {
     position: relative;
     width: 90%;
@@ -207,7 +207,7 @@ body, html {
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
 }
 
-/* 닫기 버튼 */
+/* ?リ린 踰꾪듉 */
 .popup-modal-close {
     position: absolute;
     right: 16px;
@@ -218,7 +218,7 @@ body, html {
     cursor: pointer;
 }
 
-/* 제목 */
+/* ?쒕ぉ */
 .popup-modal-title {
     text-align: center;
     font-size: 26px;
@@ -227,7 +227,7 @@ body, html {
     margin-bottom: 24px;
 }
 
-/* 폼 */
+/* ??*/
 .popup-modal-form {
     display: flex;
     flex-direction: column;
@@ -255,14 +255,14 @@ body, html {
     box-sizing: border-box;
 }
 
-/* 이메일 텍스트필드 & 버튼 가로 배치 */
+/* ?대찓???띿뒪?명븘??& 踰꾪듉 媛濡?諛곗튂 */
 .popup-email-row {
     display: flex;
     align-items: flex-end;
     gap: 10px;
 }
 
-/* 버튼 */
+/* 踰꾪듉 */
 .popup-btn-primary {
     margin-top: 10px;
     width: 100%;
@@ -276,7 +276,7 @@ body, html {
     font-weight: 600;
 }
 
-/* 버튼2 */
+/* 踰꾪듉2 */
 .popup-btn-primary2 {
     width: 100%;
     padding: 12px 14px;
@@ -289,7 +289,7 @@ body, html {
     font-weight: 600;
 }
 
-/* 인증 버튼 */
+/* ?몄쬆 踰꾪듉 */
 .popup-auth-btn-primary {
     height: 42px; 
     width: 20%;
@@ -304,7 +304,7 @@ body, html {
     margin-top: 0; 
 }
 
-/* 하단 */
+/* ?섎떒 */
 .login-modal-footer {
     margin-top: 18px;
     text-align: center;
