@@ -4,6 +4,7 @@ const chatCanvas = document.querySelector('.chat-canvas');
 
 const STORAGE_KEY_HISTORY = 'unigo.app.chatHistory';
 const STORAGE_KEY_ONBOARDING = 'unigo.app.onboarding';
+const STORAGE_KEY_RESULT_PANEL = 'unigo.app.resultPanel';
 
 const API_CHAT_URL = '/api/chat';
 const API_ONBOARDING_URL = '/api/onboarding';
@@ -49,6 +50,7 @@ const init = () => {
     loadState();
     detectReloadAndReset(); // Reset on full reload if needed, or keep persistence
     renderHistory();
+    restoreResultPanel(); // Restore right panel state
 
     if (!onboardingState.isComplete) {
         // Start or continue onboarding
@@ -115,6 +117,40 @@ const appendBubble = (text, type, shouldPersist = true) => {
         chatHistory.push({ role, content: text });
         saveState();
     }
+    return bubble;
+};
+
+// Streaming/Typing effect for AI messages
+const appendBubbleWithTyping = async (text, type, shouldPersist = true, speed = 20) => {
+    if (!chatCanvas) return;
+
+    const bubble = document.createElement('div');
+    bubble.classList.add('bubble', type);
+    chatCanvas.appendChild(bubble);
+
+    // Typing effect
+    let currentText = '';
+    for (let i = 0; i < text.length; i++) {
+        currentText += text[i];
+
+        // Format with markdown links
+        let formattedText = currentText.replace(/\n/g, '<br>');
+        formattedText = formattedText.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" style="color:#0066cc; text-decoration:underline;">$1</a>');
+
+        bubble.innerHTML = formattedText;
+        chatCanvas.scrollTop = chatCanvas.scrollHeight;
+
+        // Wait for next character
+        await new Promise(resolve => setTimeout(resolve, speed));
+    }
+
+    if (shouldPersist) {
+        const role = type === 'user' ? 'user' : 'assistant';
+        chatHistory.push({ role, content: text });
+        saveState();
+    }
+
+    return bubble;
 };
 
 const renderHistory = () => {
@@ -139,7 +175,7 @@ const showLoadingDetails = () => {
 
 // -- Onboarding Logic --
 
-const startOnboardingStep = () => {
+const startOnboardingStep = async () => {
     if (onboardingState.step >= ONBOARDING_QUESTIONS.length) {
         finishOnboarding();
         return;
@@ -151,7 +187,8 @@ const startOnboardingStep = () => {
     // Simple heuristic: check if last AI message is the current prompt
     const lastAiMsg = chatHistory.slice().reverse().find(m => m.role === 'assistant');
     if (!lastAiMsg || lastAiMsg.content !== currentQ.prompt) {
-        appendBubble(currentQ.prompt, 'ai');
+        // Use typing effect for onboarding questions
+        await appendBubbleWithTyping(currentQ.prompt, 'ai', true, 15);
     }
 
     if (chatInput) {
@@ -197,7 +234,7 @@ const finishOnboarding = async () => {
 
         if (loadingBubble) loadingBubble.remove();
 
-        // Show Summary
+        // Show Summary with typing effect
         const recs = result.recommended_majors || [];
         let summaryText = "온보딩 답변을 바탕으로 추천 전공 TOP 5를 정리했어요:\n";
         recs.slice(0, 5).forEach((major, idx) => {
@@ -205,15 +242,15 @@ const finishOnboarding = async () => {
         });
         summaryText += "\n필요하면 위 전공 중 궁금한 학과를 지정해서 더 물어봐도 좋아요!";
 
-        appendBubble(summaryText, 'ai');
+        await appendBubbleWithTyping(summaryText, 'ai', true, 15);
 
-        // Update Setting Board (Right Panel) logic if needed
+        // Update Setting Board (Right Panel) and save state
         updateResultPanel(result);
 
     } catch (e) {
         console.error(e);
         if (loadingBubble) loadingBubble.remove();
-        appendBubble("죄송합니다. 추천 정보를 불러오는데 실패했습니다.", 'ai');
+        await appendBubbleWithTyping("죄송합니다. 추천 정보를 불러오는데 실패했습니다.", 'ai', true, 20);
     }
 
     if (chatInput) chatInput.placeholder = "궁금한 점을 물어보세요!";
@@ -226,6 +263,7 @@ const updateResultPanel = (result) => {
     const recs = result.recommended_majors || [];
     if (recs.length === 0) {
         resultCard.innerHTML = "추천 결과가 없습니다.";
+        sessionStorage.setItem(STORAGE_KEY_RESULT_PANEL, "추천 결과가 없습니다.");
         return;
     }
 
@@ -236,6 +274,20 @@ const updateResultPanel = (result) => {
     });
 
     resultCard.innerHTML = html;
+
+    // Save result panel state to sessionStorage
+    sessionStorage.setItem(STORAGE_KEY_RESULT_PANEL, html);
+};
+
+// Restore result panel from sessionStorage
+const restoreResultPanel = () => {
+    const resultCard = document.querySelector('.result-card');
+    if (!resultCard) return;
+
+    const savedContent = sessionStorage.getItem(STORAGE_KEY_RESULT_PANEL);
+    if (savedContent) {
+        resultCard.innerHTML = savedContent;
+    }
 };
 
 // -- Main Chat Logic --
@@ -271,12 +323,14 @@ const handleChatInput = async (text) => {
         const data = await response.json();
 
         if (loadingBubble) loadingBubble.remove();
-        appendBubble(data.response, 'ai');
+
+        // Use typing effect for AI responses
+        await appendBubbleWithTyping(data.response, 'ai', true, 15);
 
     } catch (error) {
         console.error(error);
         if (loadingBubble) loadingBubble.remove();
-        appendBubble("오류가 발생했습니다.", 'ai', false);
+        await appendBubbleWithTyping("오류가 발생했습니다.", 'ai', false, 20);
     }
 };
 
