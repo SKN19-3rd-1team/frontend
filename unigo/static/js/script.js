@@ -20,6 +20,45 @@ closeBtnLogin.addEventListener("click", () => modalLogin.classList.remove("show"
 overlayLogIn.addEventListener("click", () => modalLogin.classList.remove("show"));
 
 
+const loginConfirmBtn = document.getElementById("btn-login-confirm");
+
+if (loginConfirmBtn) {
+    loginConfirmBtn.addEventListener("click", () => {
+        const emailOrId = document.getElementById("login-email").value;
+        const password = document.getElementById("login-password").value;
+
+        if (!emailOrId || !password) {
+            alert("이메일/아이디와 비밀번호를 입력해주세요.");
+            return;
+        }
+
+        fetch("/api/auth/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                username: emailOrId,
+                password: password
+            })
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.user) {
+                    // 로그인 성공
+                    window.location.href = "/chat/";
+                } else {
+                    alert(data.error || "로그인 실패");
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("서버 오류가 발생했습니다.");
+            });
+    });
+}
+
+
 // 회원가입 팝업
 const modalSignup = document.getElementById("signup-modal");
 const closeBtnSignup = document.getElementById("btn-signup-close");
@@ -35,6 +74,7 @@ const passwordCheckInput = document.getElementById("signup-password-check");
 if (linkSignup) {
     linkSignup.addEventListener("click", () => {
         modalSignup.classList.add("show");
+        modalLogin.classList.remove("show"); // 로그인 창 닫기
     });
 }
 
@@ -69,8 +109,44 @@ if (signUpConfirmBtn) {
             return;
         }
 
-        modalSignup.classList.remove("show");
-        modalSignupComplete.classList.add("show");
+        const username = document.getElementById("signup-username").value;
+        const email = document.getElementById("signup-email").value;
+        const password = passwordInput.value;
+
+        // 회원가입 API 호출
+        fetch("/api/auth/signup", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                username: username,
+                email: email,
+                password: password
+            })
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.user) {
+                    // 회원가입 성공 -> 완료 모달 띄우기
+                    modalSignup.classList.remove("show");
+                    modalSignupComplete.classList.add("show");
+
+                    // 완료 모달 닫으면 채팅 페이지로 이동 (자동 로그인 됨)
+                    closeBtnSignupComplete.onclick = () => {
+                        window.location.href = "/chat/";
+                    };
+                    overlaySignupComplete.onclick = () => {
+                        window.location.href = "/chat/";
+                    };
+                } else {
+                    alert(data.error || "회원가입 실패");
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("서버 오류가 발생했습니다.");
+            });
     });
 }
 
@@ -83,7 +159,7 @@ const closeBtnFindPassword = document.getElementById("btn-find-password-close");
 const overlayFindPassword = document.getElementById("find-password-overlay");
 
 const tempPasswordBtn = document.getElementById("btn-temp-password"); // 임시 비밀번호 받기 버튼
-const returnLoginBtn = document.getElementById("btn-return-login"); 
+const returnLoginBtn = document.getElementById("btn-return-login");
 
 if (linkForgotPassword) {
     linkForgotPassword.addEventListener("click", () => {

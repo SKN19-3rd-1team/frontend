@@ -1,6 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +9,9 @@
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inria+Serif:wght@700&family=Inter:wght@400&family=Roboto:wght@400&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inria+Serif:wght@700&family=Inter:wght@400&family=Roboto:wght@400&display=swap"
+        rel="stylesheet">
     {% block extra_head %}{% endblock %}
 </head>
 
@@ -30,15 +33,16 @@
             <h2 class="popup-modal-title">Login</h2>
 
             <form class="popup-modal-form" onsubmit="return false;">
-                
+
                 <label class="popup-field">
-                    <span class="popup-label">* 이메일</span>
-                    <input type="email" class="popup-input" placeholder="example@you.com" required />
+                    <span class="popup-label">* 이메일 또는 아이디</span>
+                    <input type="text" id="login-email" class="popup-input" placeholder="example@you.com 또는 username"
+                        required />
                 </label>
 
                 <label class="popup-field">
                     <span class="popup-label">* 비밀번호</span>
-                    <input type="password" class="popup-input" placeholder="Password" required />
+                    <input type="password" id="login-password" class="popup-input" placeholder="Password" required />
                 </label>
 
                 <button class="popup-btn-primary" id="btn-login-confirm">로그인</button>
@@ -68,24 +72,26 @@
                 <div class="popup-email-row">
                     <label class="popup-field">
                         <span class="popup-label">* 이메일</span>
-                        <input type="email" class="popup-input" placeholder="example@you.com" required />
+                        <input type="email" id="signup-email" class="popup-input" placeholder="example@you.com"
+                            required />
                     </label>
                     <button class="popup-auth-btn-primary" id="btn-email-confirm">인증</button>
                 </div>
-                
+
                 <label class="popup-field">
-                    <span class="popup-label">* 닉네임</span>
-                    <input type="nickname" class="popup-input" placeholder="Hong Gildong" required />
+                    <span class="popup-label">* 닉네임 (아이디)</span>
+                    <input type="text" id="signup-username" class="popup-input" placeholder="Hong Gildong" required />
                 </label>
 
                 <label class="popup-field">
                     <span class="popup-label">* 비밀번호</span>
-                    <input type="password" class="popup-input" id="signup-password" placeholder="Password" required />
+                    <input type="password" id="signup-password" class="popup-input" placeholder="Password" required />
                 </label>
 
                 <label class="popup-field">
                     <span class="popup-label">* 비밀번호 확인</span>
-                    <input type="password-check" class="popup-input" id="signup-password-check" placeholder="Password Check" required />
+                    <input type="password" id="signup-password-check" class="popup-input" placeholder="Password Check"
+                        required />
                 </label>
 
                 <button class="popup-btn-primary" id="btn-signup-confirm">회원가입 완료</button>
@@ -114,7 +120,7 @@
             <h2 class="popup-modal-title">비밀번호 찾기</h2>
 
             <form class="popup-modal-form" onsubmit="return false;">
-                
+
                 <label class="popup-field">
                     <span class="popup-label">* 이메일</span>
                     <input type="email" class="popup-input" placeholder="example@you.com" required />
@@ -130,8 +136,9 @@
             </form>
         </div>
     </div>
-    
+
     <script src="{% static 'js/script.js' %}"></script>
     {% block extra_js %}{% endblock %}
 </body>
+
 </html>
