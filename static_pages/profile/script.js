@@ -1,83 +1,83 @@
-// 罹먮┃???곗씠??
+// 캐릭터 데이터
 const characters = [
     {
-        name: '?좊겮',
-        image: '../assets/rabbit.png',
-        description: '?쒕컻?섍퀬 ?멸린??留롮? ?깃꺽?쇰줈 ?덈줈??寃껋쓣 ?먰뿕?섎뒗 寃껋쓣 醫뗭븘?⑸땲??',
+        name: '토끼',
+        image: '../../assets/rabbit.png',
+        description: '활발하고 호기심 많은 성격으로 새로운 것을 탐험하는 것을 좋아합니다.',
     },
     {
-        name: '怨?,
-        image: '../assets/bear.png',
-        description: '?좊뱺?섍퀬 誘우쓬吏곹븳 ?깃꺽?쇰줈 移쒓뎄?ㅼ쓣 蹂댄샇?섍퀬 諛곕젮?⑸땲??',
+        name: '곰',
+        image: '../../assets/bear.png',
+        description: '든든하고 믿음직한 성격으로 친구들을 보호하고 배려합니다.',
     },
     {
-        name: '?ъ슦',
-        image: '../assets/fox.png',
-        description: '?곷━?섍퀬 ?ъ튂?덈뒗 ?깃꺽?쇰줈 臾몄젣 ?닿껐 ?λ젰???곗뼱?⑸땲??',
+        name: '여우',
+        image: '../../assets/fox.png',
+        description: '영리하고 재치있는 성격으로 문제 해결 능력이 뛰어납니다.',
     },
     {
-        name: '怨좎뒾?꾩튂',
-        image: '../assets/hedgehog_ver1.png',
-        description: '議곗떖?ㅻ읇吏留??곕쑜??留덉쓬??媛吏??깃꺽?쇰줈 吏꾩젙??移쒓뎄瑜??뚯쨷???ш퉩?덈떎.',
+        name: '고슴도치',
+        image: '../../assets/hedgehog_ver1.png',
+        description: '조심스럽지만 따뜻한 마음을 가진 성격으로 진정한 친구를 소중히 여깁니다.',
     },
     {
-        name: '肄붿븣??,
-        image: '../assets/koala.png',
-        description: '?먭툔?섍퀬 ?됲솕濡쒖슫 ?깃꺽?쇰줈 ?덉젙媛먯쓣 二쇰뒗 議댁옱?낅땲??',
+        name: '코알라',
+        image: '../../assets/koala.png',
+        description: '느긋하고 평화로운 성격으로 안정감을 주는 존재입니다.',
     },
     {
-        name: '?섎떖',
-        image: '../assets/otter.png',
-        description: '?λ궃湲?留롪퀬 ?ш탳?곸씤 ?깃꺽?쇰줈 二쇰???利먭쾪寃?留뚮벊?덈떎.',
+        name: '수달',
+        image: '../../assets/otter.png',
+        description: '장난기 많고 사교적인 성격으로 주변을 즐겁게 만듭니다.',
     },
     {
-        name: '??톬',
-        image: '../assets/penguin.png',
-        description: '異⑹꽦?ㅻ읇怨??깆떎???깃꺽?쇰줈 紐⑺몴瑜??ν빐 袁몄????섏븘媛묐땲??',
+        name: '펭귄',
+        image: '../../assets/penguin.png',
+        description: '충성스럽고 성실한 성격으로 목표를 향해 꾸준히 나아갑니다.',
     },
     {
-        name: '?덇뎄由?,
-        image: '../assets/raccoon.png',
-        description: '?멸린??留롪퀬 李쎌쓽?곸씤 ?깃꺽?쇰줈 ?낇듅???쒓컖??媛吏怨??덉뒿?덈떎.',
+        name: '너구리',
+        image: '../../assets/raccoon.png',
+        description: '호기심 많고 창의적인 성격으로 독특한 시각을 가지고 있습니다.',
     },
     {
-        name: '?섎Т?섎낫',
-        image: '../assets/sloth.png',
-        description: '?ъ쑀濡?퀬 ?щ젮 源딆? ?깃꺽?쇰줈 ?좎쨷?섍쾶 ?앷컖?섎ŉ ?됰룞?⑸땲??',
+        name: '나무늘보',
+        image: '../../assets/sloth.png',
+        description: '여유롭고 사려 깊은 성격으로 신중하게 생각하며 행동합니다.',
     },
     {
-        name: '嫄곕턿??,
-        image: '../assets/turtle.png',
-        description: '?몃궡???덇퀬 吏?쒕줈???깃꺽?쇰줈 ?κ린?곸씤 紐⑺몴瑜?異붽뎄?⑸땲??',
+        name: '거북이',
+        image: '../../assets/turtle.png',
+        description: '인내심 있고 지혜로운 성격으로 장기적인 목표를 추구합니다.',
     }
 ];
 
 let currentIndex = 0;
 const totalItems = characters.length;
-const theta = 360 / totalItems; // 媛??꾩씠???ъ씠??媛곷룄
-const radius = 400; // ?뚯쟾 諛섍꼍
+const theta = 360 / totalItems; // 각 아이템 사이의 각도
+const radius = 400; // 회전 반경
 
-// 珥덇린??
+// 초기화
 function init() {
     const carousel = document.getElementById('carousel3d');
-    
-    // 罹먮윭? ?꾩씠???앹꽦
+
+    // 캐러셀 아이템 생성
     characters.forEach((character, index) => {
         const item = document.createElement('div');
         item.className = `carousel-item ${index === 0 ? 'active' : ''}`;
         item.innerHTML = `
             <img src="${character.image}" alt="${character.name}" class="character-image">
         `;
-        
-        // 3D ?먰삎 諛곗튂
+
+        // 3D 원형 배치
         const angle = theta * index;
         item.style.transform = `rotateY(${angle}deg) translateZ(${radius}px)`;
-        
-        // ?대┃ ?대깽??
+
+        // 클릭 이벤트
         item.addEventListener('click', () => {
             const clickedIndex = index;
             const diff = clickedIndex - currentIndex;
-            
+
             if (diff > totalItems / 2) {
                 rotateCarousel(-(totalItems - diff));
             } else if (diff < -totalItems / 2) {
@@ -86,57 +86,57 @@ function init() {
                 rotateCarousel(diff);
             }
         });
-        
+
         carousel.appendChild(item);
     });
-    
-    // 踰꾪듉 ?대깽??
+
+    // 버튼 이벤트
     document.getElementById('prevBtn').addEventListener('click', () => rotateCarousel(-1));
     document.getElementById('nextBtn').addEventListener('click', () => rotateCarousel(1));
     document.getElementById('selectBtn').addEventListener('click', selectCharacter);
-    
-    // ?ㅻ낫???대깽??
+
+    // 키보드 이벤트
     document.addEventListener('keydown', handleKeyboard);
-    
-    // 留덉슦???쒕옒洹?
+
+    // 마우스 드래그
     setupDrag();
-    
-    // 珥덇린 ?뺣낫 ?낅뜲?댄듃
+
+    // 초기 정보 업데이트
     updateCharacterInfo();
 }
 
-// 罹먮윭? ?뚯쟾
+// 캐러셀 회전
 function rotateCarousel(direction) {
     currentIndex = (currentIndex + direction + totalItems) % totalItems;
-    
+
     const carousel = document.getElementById('carousel3d');
     const angle = -theta * currentIndex;
     carousel.style.transform = `rotateY(${angle}deg)`;
-    
-    // ?쒖꽦 ?꾩씠???낅뜲?댄듃
+
+    // 활성 아이템 업데이트
     const items = document.querySelectorAll('.carousel-item');
     items.forEach((item, index) => {
         item.classList.toggle('active', index === currentIndex);
     });
-    
+
     updateCharacterInfo();
 }
 
-// 罹먮┃???뺣낫 ?낅뜲?댄듃
+// 캐릭터 정보 업데이트
 function updateCharacterInfo() {
     const character = characters[currentIndex];
     document.getElementById('characterName').textContent = character.name;
     document.getElementById('characterDesc').textContent = character.description;
 }
 
-// 罹먮┃???좏깮
+// 캐릭터 선택
 function selectCharacter() {
     const character = characters[currentIndex];
-    alert(`${character.name}??瑜? ?좏깮?섏뀲?듬땲??\n\n${character.description}`);
-    // ?ш린???ㅼ쓬 ?섏씠吏濡??대룞?섍굅???곗씠?곕? ??ν븯??濡쒖쭅 異붽?
+    alert(`${character.name}을(를) 선택하셨습니다!\n\n${character.description}`);
+    // 여기에 다음 페이지로 이동하거나 데이터를 저장하는 로직 추가
 }
 
-// ?ㅻ낫???ㅻ퉬寃뚯씠??
+// 키보드 네비게이션
 function handleKeyboard(e) {
     if (e.key === 'ArrowLeft') {
         rotateCarousel(-1);
@@ -147,29 +147,29 @@ function handleKeyboard(e) {
     }
 }
 
-// ?쒕옒洹?湲곕뒫
+// 드래그 기능
 function setupDrag() {
     const scene = document.querySelector('.carousel-scene');
     let isDragging = false;
     let startX = 0;
     let currentX = 0;
-    
+
     scene.addEventListener('mousedown', (e) => {
         isDragging = true;
         startX = e.clientX;
         scene.style.cursor = 'grabbing';
     });
-    
+
     scene.addEventListener('mousemove', (e) => {
         if (!isDragging) return;
         currentX = e.clientX;
     });
-    
+
     scene.addEventListener('mouseup', (e) => {
         if (!isDragging) return;
-        
+
         const diff = startX - currentX;
-        
+
         if (Math.abs(diff) > 50) {
             if (diff > 0) {
                 rotateCarousel(1);
@@ -177,32 +177,32 @@ function setupDrag() {
                 rotateCarousel(-1);
             }
         }
-        
+
         isDragging = false;
         scene.style.cursor = 'grab';
     });
-    
+
     scene.addEventListener('mouseleave', () => {
         isDragging = false;
         scene.style.cursor = 'grab';
     });
-    
-    // ?곗튂 ?대깽??
+
+    // 터치 이벤트
     scene.addEventListener('touchstart', (e) => {
         isDragging = true;
         startX = e.touches[0].clientX;
     });
-    
+
     scene.addEventListener('touchmove', (e) => {
         if (!isDragging) return;
         currentX = e.touches[0].clientX;
     });
-    
+
     scene.addEventListener('touchend', () => {
         if (!isDragging) return;
-        
+
         const diff = startX - currentX;
-        
+
         if (Math.abs(diff) > 50) {
             if (diff > 0) {
                 rotateCarousel(1);
@@ -210,17 +210,17 @@ function setupDrag() {
                 rotateCarousel(-1);
             }
         }
-        
+
         isDragging = false;
     });
-    
+
     scene.style.cursor = 'grab';
 }
 
-// ?먮룞 ?뚯쟾 (?좏깮?ы빆 - 二쇱꽍 ?댁젣?섎㈃ ?먮룞?쇰줈 ?뚯쟾)
+// 자동 회전 (선택사항 - 주석 해제하면 자동으로 회전)
 // setInterval(() => {
 //     rotateCarousel(1);
 // }, 3000);
 
-// ?섏씠吏 濡쒕뱶??珥덇린??
+// 페이지 로드시 초기화
 init();
