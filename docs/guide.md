@@ -35,12 +35,8 @@ cd frontend
 
 ```bash
 # Windows
-python -m venv venv
-venv\Scripts\activate
-
-# Linux/Mac
-python3 -m venv venv
-source venv/bin/activate
+conda create -n langchain_env python=3.11
+conda activate langchain_env
 ```
 
 ### 3. 의존성 설치
