@@ -128,6 +128,22 @@ python manage.py runserver
 
 ## 📚 주요 기능
 
+## 🔑 사용자 인증 및 대화 기록 (New)
+새롭게 추가된 사용자 인증 기능을 통해 대화 기록을 관리할 수 있습니다:
+- **회원가입/로그인**: Username 또는 Email을 통한 간편한 계정 생성
+- **대화 기록 저장**: 로그인 시 모든 대화와 전공 추천 이력이 DB에 저장됩니다.
+- **세션 유지**: 비로그인 사용자는 세션 ID 기반으로 단기 기록을 유지합니다.
+
+## 🗄️ 데이터 마이그레이션 (New)
+전공 데이터(`major_detail.json`)를 DB로 적재하여 효율적인 관리가 가능합니다.
+
+```bash
+# 전공 데이터 DB 마이그레이션 실행
+python manage.py load_major_data
+```
+
+## 📚 주요 기능
+
 ### 1. 온보딩 기반 전공 추천 시스템
 
 사용자에게 4가지 질문을 통해 프로파일을 수집하고 맞춤형 전공을 추천합니다:
@@ -184,35 +200,32 @@ python manage.py runserver
 - **Vanilla JavaScript**: 클라이언트 로직 (프레임워크 없음)
 
 ### Data
-- **커리어넷**: 전공 및 진로 데이터 출처
-- **한국대학교육협의회 (KCUE)**: 입시 정보 출처
+- **PostgreSQL / SQLite**: 사용자, 대화 기록, 전공 데이터 저장소
+- **커리어넷 & KCUE**: 원천 데이터 출처
 
 ## 📖 API 엔드포인트
 
-### POST `/api/chat`
-일반 챗봇 대화 API
+### Auth API (New)
+- `POST /api/auth/signup`: 회원가입
+- `POST /api/auth/login`: 로그인 (Username or Email)
+- `POST /api/auth/logout`: 로그아웃
+- `GET /api/auth/me`: 현재 사용자 정보
 
+### Feature API
+- `POST /api/chat`: 일반 챗봇 대화 API (DB 저장 포함)
+- `POST /api/onboarding`: 전공 추천 API (DB 저장 포함)
+
+### POST `/api/chat`
 **Request:**
 ```json
 {
   "message": "컴퓨터공학과에 대해 알려줘",
-  "history": [
-    {"role": "user", "content": "안녕"},
-    {"role": "assistant", "content": "안녕하세요!"}
-  ]
-}
-```
-
-**Response:**
-```json
-{
-  "response": "컴퓨터공학과는..."
+  "history": [], 
+  "session_id": "optional-uuid"
 }
 ```
 
 ### POST `/api/onboarding`
-온보딩 답변 기반 전공 추천 API
-
 **Request:**
 ```json
 {
@@ -222,23 +235,6 @@ python manage.py runserver
     "desired_salary": "5000만원",
     "preferred_majors": "컴퓨터공학과"
   }
-}
-```
-
-**Response:**
-```json
-{
-  "recommended_majors": [
-    {
-      "major_id": "computer-science",
-      "major_name": "컴퓨터공학과",
-      "score": 20.0,
-      "cluster": "공학계열",
-      "salary": 4500,
-      "summary": "..."
-    },
-    ...
-  ]
 }
 ```
 
