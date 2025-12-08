@@ -20,3 +20,28 @@
    - **조치 내용**: `backend/graph/nodes.py` 수정
      - 선호 전공이 기존 검색 결과(`hits`)에 없는 경우, 해당 전공 정보를 담은 **Synthetic SearchHit(합성 검색 결과 객체)**를 강제로 생성하여 `hits` 리스트에 추가하도록 로직을 보완했습니다.
      - 이를 통해 벡터 유사도가 낮더라도 사용자가 명시적으로 언급한 전공이 최종 추천 목록에 정상적으로 노출되도록 수정했습니다.
+
+5. **사용자 인증 및 DB/대화 기록 시스템 구축** (2025-12-08)
+   
+   **Frontend (Template & JS)**
+   - `templates/unigo_app/base.html`: 로그인/회원가입 모달 구조 복구 및 입력 필드에 `id` 속성(`login-email` 등) 추가, 라벨 개선("이메일 또는 아이디").
+   - `static/js/script.js`: 로그인(`/api/auth/login`) 및 회원가입(`/api/auth/signup`) API 호출 로직 구현. 성공 시 자동 리다이렉트 처리.
+   - `templates/unigo_app/header.html`: 로그인 상태에 따라 Login/Logout 버튼 조건부 렌더링 적용 (Django Template Tag 사용).
+   - `views.py/home`: 루트 경로 접속 시 로그인 상태에 따라 `/chat` 또는 `/auth`로 자동 리다이렉트(Redirect) 로직 추가.
+
+   **Backend (Django Auth & Models)**
+   - **모델 구현 (`models.py`)**:
+     - `Conversation`: 사용자별/세션별 대화 기록 저장 (로그인/비로그인 모두 지원).
+     - `Message`: 대화 메시지 저장 (`role`, `content` 포함).
+     - `MajorRecommendation`: 온보딩 결과 저장.
+     - `Major`, `University`: 전공 및 대학 데이터 적재용 모델.
+   - **인증 API (`views.py`)**:
+     - `auth_login`: **이메일 또는 Username** 중 하나로 로그인 가능하도록 유연한 인증 로직 구현.
+     - `auth_signup`: 회원가입 시 자동 로그인 처리.
+   - **기능 API 업데이트**:
+     - `chat_api`, `onboarding_api`: DB에 대화 및 추천 결과를 실시간으로 저장하도록 수정.
+
+   **Data Management**
+   - **마이그레이션 도구 (`management/commands/load_major_data.py`)**:
+     - `backend/data/major_detail.json`의 대용량 전공 데이터를 Django DB 모델로 적재하는 커맨드 개발.
+     - 실행: `python manage.py load_major_data`
